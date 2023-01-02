@@ -16,3 +16,17 @@ script:
 # - docker run elvinpedro/docker-react npm run test -- -- coverage
 # from training END
   - docker run -e CI=true elvinpedro/docker-react npm run test
+
+# AWS deployment
+deploy:
+  provider: elasticbeanstalk
+  # from dockerreact-env.eba-pgwrnxj7.us-east-1.elasticbeanstalk.com/
+  region: "us-east-1"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-190642624869"
+  bucket_path: "docker-react"
+  on:
+    branch: master #anytime master is changed, deploy to AWS
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
