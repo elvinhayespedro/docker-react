@@ -18,6 +18,11 @@ RUN npm run build
 ##### run phase
 FROM nginx
 
+# in most env, expose does nothing on localhost
+# AWS EBS is going to look for EXPOSE instruction
+# AWS EBS will map automatically for incoming traffic
+EXPOSE 80
+
 # copy from builder phase
 # first param is what to copy
 # second param is the destination
