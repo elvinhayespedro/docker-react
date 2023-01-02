@@ -1,0 +1,18 @@
+language: generic
+
+# super user permission - this is super user level permission
+sudo: required
+services:
+  - docker # install copy of docker in our running container
+
+# anything below is series of steps to occur
+# before we run our tests or deploy our project
+before_install:
+  - docker build -t elvinpedro/docker-react -f Dockerfile.dev .
+
+# contains all different commands to run our test suite
+script:
+# from training START
+# - docker run elvinpedro/docker-react npm run test -- -- coverage
+# from training END
+  - docker run -e CI=true elvinpedro/docker-react npm run test
